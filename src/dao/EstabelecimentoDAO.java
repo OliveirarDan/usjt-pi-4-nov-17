@@ -13,7 +13,7 @@ import model.Estabelecimento;
 public class EstabelecimentoDAO
 {
 
-	public Estabelecimento criar(Estabelecimento estabelecimento)
+	public int criar(Estabelecimento estabelecimento)
 	{
 		String sqlInsert = "INSERT INTO tbl_estabelecimento(nome, endereco, lat, lng, horario_funcionamento, telefone, email, site,tbl_categoria_id_categoria ) "
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,7 +46,7 @@ public class EstabelecimentoDAO
 		{
 			e.printStackTrace();
 		}
-		return estabelecimento;
+		return estabelecimento.getId();
 	}
 
 	public void atualizar(Estabelecimento estabelecimento)

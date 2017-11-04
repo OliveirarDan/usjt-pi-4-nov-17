@@ -9,10 +9,10 @@ public class EstabelecimentoService
 	{
 		EstabelecimentoDAO dao = new EstabelecimentoDAO();
 
-		public Estabelecimento criar(Estabelecimento estabelecimento)
+		public int criar(Estabelecimento estabelecimento)
 			{
-				estabelecimento = dao.criar(estabelecimento);
-				return estabelecimento;
+				dao.criar(estabelecimento);
+				return estabelecimento.getId();
 			}
 
 		public void atualizar(Estabelecimento estabelecimento)

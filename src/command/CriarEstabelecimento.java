@@ -7,7 +7,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Estabelecimento;
 import service.EstabelecimentoService;
@@ -44,14 +43,28 @@ public class CriarEstabelecimento implements Command
 		estabelecimento.setIdCategoria(uCategoria);
 		RequestDispatcher dispatcher = null;
 		EstabelecimentoService es = new EstabelecimentoService();
-		Estabelecimento novoEstabelecimento;
-		novoEstabelecimento = es.criar(estabelecimento);
+		int insertedId;
+		insertedId = es.criar(estabelecimento);
+		estabelecimento.setId(insertedId);
 		
+		String jsonObject = "{"
+				+ "\"id\":  \"" + estabelecimento.getId() + "\", "
+				+ "\"endereco\": \"" + estabelecimento.getEndereco() + "\", "
+				+ "\"lat\": \"" + estabelecimento.getLat() + "\", "
+				+ "\"lng\": \"" + estabelecimento.getLng() + "\", "
+				+ "\"horario\": \"" + estabelecimento.getHorario() + "\", "
+				+ "\"telefone\": \"" + estabelecimento.getTelefone() + "\", "
+				+ "\"email\": \"" + estabelecimento.getEmail() + "\", "
+				+ "\"site\": \"" + estabelecimento.getSite() + "\", "
+				+ "\"categoria\": \"" + estabelecimento.getCategoria().getNome()
+				+ "\"}";
 		
+
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(jsonObject);
 		
-		System.out.println(novoEstabelecimento.getId());
 		dispatcher = request.getRequestDispatcher("estabelecimento.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 
 }

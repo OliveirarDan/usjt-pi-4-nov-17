@@ -7,15 +7,14 @@ $(document).ready(function(){
 		e.preventDefault();
 			
 		data = getFormData($(this));
-		
-		console.log(data);
-
 			
 		$.ajax({
 			url: "controller.do",
 			data: data,
 			method: "POST",
 			success: function(data){
+				console.log(data);
+				data = JSON.parse(data);
 				console.log(data);
 			}
 		})
