@@ -32,12 +32,12 @@
 
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary btn-lg"
-		data-toggle="modal" data-target="#myModal">Abrir modal</button>
+		data-toggle="modal" data-target="#meusDadosModal">Abrir modal</button>
 
 
 	<div class="container">
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="meusDadosModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="container-fluid">
 				<div class="row">
 					<form action="controller.do" method="post">
@@ -51,17 +51,17 @@
 								<div class="card-content">
 									<div class="row">
 										<div class="col-xs-6">
-											<input style="display:none;" type="text" name="id" id="id" value="${sessionScope.uId}">
+											<input style="display:none;" type="text" name="id" id="id" value="${usuario.id}">
 											<div class="form-group label-floating is-empty">
 												<label class="control-label">Nome</label>
-												<input type="text" class="form-control" name="nome" id="nome" value="${sessionScope.uNome}"/>
+												<input type="text" class="form-control" name="nome" id="nome" value="${usuario.nome}"/>
 												<span class="material-input"></span>
 											</div>
 										</div>
 										<div class="col-xs-6">
 											<div class="form-group label-floating is-empty">
 												<label class="control-label">Sobrenome</label>
-												<input type="text" class="form-control" name="sobrenome" id="sobrenome" value="${sessionScope.uSobrenome}" />
+												<input type="text" class="form-control" name="sobrenome" id="sobrenome" value="${usuario.sobrenome}" />
 												<span class="material-input"></span>
 											</div>
 										</div>
@@ -70,7 +70,7 @@
 										<div class="col-xs-12">
 											<div class="form-group label-floating is-empty">
 												<label class="control-label">E-mail (login)</label>
-												<input type="email" class="form-control" name="email" id="email" value="${sessionScope.uEmail}" />
+												<input type="email" class="form-control" name="email" id="email" value="${usuario.email}" />
 												<span class="material-input"></span>
 											</div>
 										</div>
@@ -79,7 +79,7 @@
 										<div class="col-xs-6">
 											<div class="form-group label-floating is-empty">
 												<label class="control-label">Senha</label>
-												<input type="password" class="form-control" name="senha" id="senha" value="${sessionScope.uSenha}">
+												<input type="password" class="form-control" name="senha" id="senha" value="${usuario.senha}">
 												<span class="material-input"></span>
 											</div>
 										</div>
@@ -110,11 +110,11 @@
 							<div class="card card-profile">
 								<div class="card-avatar">
 									<!-- verifica se há uma foto de usuário, senão preenche com uma imagem default -->
-									<c:if test="${empty sessionScope.uFoto}">
+									<c:if test="${usuario.foto == ''}">
 										<img id='output' class="img" src="assets\img\profile.jpg">
 									</c:if>
-									<c:if test="${not empty sessionScope.uFoto}">
-										<img id='output' class="img" src="${sessionScope.uFoto}">
+									<c:if test="${usuario.foto != ''}">
+										<img id='output' class="img" src="${usuario.foto}">
 									</c:if>
 								</div>
 								<div class="content">

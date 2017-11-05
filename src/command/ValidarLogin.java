@@ -40,17 +40,8 @@ public class ValidarLogin implements Command
 			{
 				HttpSession session = request.getSession();
 				session.setAttribute("usuario", usuario);
-				session.setAttribute("uId", usuario.getId());
-				session.setAttribute("uNome", usuario.getNome());
-				session.setAttribute("uSobrenome", usuario.getSobrenome());
-				session.setAttribute("uEmail", usuario.getEmail());
-				session.setAttribute("uSenha", usuario.getSenha());
-				if (usuario.getFoto() != null)
-				{
-					session.setAttribute("uFoto", usuario.getFoto());
-				}
 
-				retornaRequest(request, response, "Efetuando login.", usuario, "meus-dados.jsp");
+				retornaRequest(request, response, "Efetuando login.", usuario, "index.jsp");
 
 			} else if (senhaExistente != uSenha)
 			{

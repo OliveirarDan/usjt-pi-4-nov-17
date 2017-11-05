@@ -73,7 +73,7 @@
 									<p class="mensagem"><strong>${mensagem}</strong></p>
 								</div>
 							</c:if>
-							<c:if test="${mensagem == 'Senha inválida.' || mensagem == 'Ocorreu um erro.'}">
+							<c:if test="${mensagem == 'Senha inválida.' || mensagem == 'Ocorreu um erro.' || mensagem == 'Usuário não encontrado.'}">
 								<div class="alert alert-danger">
 									<p class="mensagem"><strong >${mensagem}</strong></p>
 								</div>

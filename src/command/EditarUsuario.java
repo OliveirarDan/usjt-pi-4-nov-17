@@ -31,14 +31,16 @@ public class EditarUsuario implements Command
 		{
 
 		}
-		
+
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		usuario.setNome(uNome);
 		usuario.setSobrenome(uSobrenome);
 		usuario.setEmail(uEmail);
 		usuario.setSenha(uSenha);
-		if (uFoto != null)
+
+		if (uFoto != null && uFoto != "\t\t\t\t\t\t\t\t\t") // fazer validação para não sobrepor a foto cadastrada com
+															// uma foto nula ou vazia
 		{
 			usuario.setFoto(uFoto);
 		}
@@ -51,12 +53,7 @@ public class EditarUsuario implements Command
 
 		if (result == 0)
 		{
-			session.setAttribute("uId", usuario.getId());
-			session.setAttribute("uNome", usuario.getNome());
-			session.setAttribute("uSobrenome", usuario.getSobrenome());
-			session.setAttribute("uEmail", usuario.getEmail());
-			session.setAttribute("uSenha", usuario.getSenha());
-			session.setAttribute("uFoto", usuario.getFoto());
+			session.setAttribute("usuario", usuario);
 			session.setAttribute("mensagem", "Dados atualizados com sucesso.");
 		} else
 		{
@@ -67,6 +64,5 @@ public class EditarUsuario implements Command
 		request.setAttribute("usuario", usuario);
 		RequestDispatcher view = request.getRequestDispatcher("meus-dados.jsp");
 		view.forward(request, response);
-
 	}
 }

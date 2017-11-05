@@ -9,6 +9,13 @@
 	href="assets/img/apple-icon.png" />
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<!-- verifica se há um usuário logado. -->
+<c:if test="${empty usuario}">
+    <c:redirect url="login.jsp" />
+</c:if>
+
+
 <title>Sem Barreiras | Você pode ir aonde você quiser</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
@@ -44,6 +51,9 @@
 					<li><a href=""> <i class="material-icons">content_paste</i>
 							<p>Meus locais</p>
 					</a></li>
+					<li><a href="javascript:void(0)" data-toggle="modal" data-target="meusDadosModal"> <i class="material-icons">face</i>
+							<p>Meus dados</p>
+					</a></li>
 				</ul>
 			</div>
 		</div>
@@ -59,7 +69,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 
