@@ -1,5 +1,3 @@
 /build/
 /bin
 /src/dao/ConnectionFactory.java
-.classpath
-.project
