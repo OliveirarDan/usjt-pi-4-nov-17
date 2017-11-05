@@ -13,7 +13,6 @@ import service.UsuarioService;
 
 public class EditarUsuario implements Command
 {
-
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -32,15 +31,17 @@ public class EditarUsuario implements Command
 		{
 
 		}
-
-		// instanciar o javabean
+		
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		usuario.setNome(uNome);
 		usuario.setSobrenome(uSobrenome);
 		usuario.setEmail(uEmail);
 		usuario.setSenha(uSenha);
-		usuario.setFoto(uFoto);
+		if (uFoto != null)
+		{
+			usuario.setFoto(uFoto);
+		}
 
 		// Instancia um usuário service
 		UsuarioService us = new UsuarioService();
