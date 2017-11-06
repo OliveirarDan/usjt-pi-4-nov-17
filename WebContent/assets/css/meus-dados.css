@@ -3,4 +3,7 @@
 .alertas{
 	margin: 10px;
 }
+input[type=file] {
+	width:100%;
+}
 

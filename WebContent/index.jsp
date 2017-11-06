@@ -51,7 +51,7 @@
 					<li><a href=""> <i class="material-icons">content_paste</i>
 							<p>Meus locais</p>
 					</a></li>
-					<li><a href="javascript:void(0)" data-toggle="modal" data-target="meusDadosModal"> <i class="material-icons">face</i>
+					<li><a href="#" data-toggle="modal" data-target="#meus-dados"> <i class="material-icons">face</i>
 							<p>Meus dados</p>
 					</a></li>
 				</ul>
@@ -66,6 +66,13 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<jsp:include page="estabelecimento.jsp"/>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="meus-dados">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<jsp:include page="meus-dados.jsp"/>
 				</div>
 			</div>
 		</div>

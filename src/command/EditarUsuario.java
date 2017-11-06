@@ -61,7 +61,7 @@ public class EditarUsuario implements Command
 
 		// enviar para o jsp
 		request.setAttribute("usuario", usuario);
-		RequestDispatcher view = request.getRequestDispatcher("meus-dados.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 		view.forward(request, response);
 	}
 }
