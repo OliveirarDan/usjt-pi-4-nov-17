@@ -16,7 +16,7 @@ public class EditarUsuario implements Command
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		request.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
 		String uId = request.getParameter("id");
 		String uNome = request.getParameter("nome");
 		String uSobrenome = request.getParameter("sobrenome");
@@ -39,8 +39,7 @@ public class EditarUsuario implements Command
 		usuario.setEmail(uEmail);
 		usuario.setSenha(uSenha);
 
-		if (uFoto != null && uFoto != "\t\t\t\t\t\t\t\t\t") // fazer validação para não sobrepor a foto cadastrada com
-															// uma foto nula ou vazia
+		if (uFoto != null && uFoto != "\t\t\t\t\t\t\t\t\t")
 		{
 			usuario.setFoto(uFoto);
 		}
