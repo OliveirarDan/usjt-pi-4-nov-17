@@ -119,6 +119,7 @@
 								</div>
 								<div class="content">
 									<textarea style="display:none;" id='stringFoto' name="foto">
+										${usuario.foto}
 									</textarea> 
 									<p class="card-content">	
 										<input type='file' accept='image/*' class="btn" onchange="openFile(event)"><br>
