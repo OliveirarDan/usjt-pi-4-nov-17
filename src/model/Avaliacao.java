@@ -12,6 +12,8 @@ public class Avaliacao
 		int id_Usuario;
 		int id_Estabelecimento;
 		int id_Categoria;
+		Usuario usuario;
+		
 		
 		
 		public int getId()
@@ -93,6 +95,15 @@ public class Avaliacao
 		public void defineNotaGeral() {
 			this.notaGeral = this.notaAcessoCadeirante+this.notaSanitarioCadeirante+this.notaInstrucaoBraile+this.notaSinalizacaoPiso;
 			
+		}
+		
+		
+		public void setUsuario (int id, String nome, String sobrenome, String email,  String foto) {
+			usuario = new Usuario(id, nome, sobrenome,email,foto);
+		}
+		
+		public Usuario getUsuario() {
+			return usuario;
 		}
 
 		

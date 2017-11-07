@@ -22,9 +22,9 @@ public class ListarEstabelecimentoBuscar implements Command {
 		ArrayList<Estabelecimento> lista = null;
 		HttpSession session = request.getSession();
 		if (chave != null && chave.length() > 0) {
-			lista = estabelecimento.listarEstabelecimentos(chave);
+			lista = estabelecimento.listarEstabelecimento(chave);
 		} else {
-			lista = estabelecimento.listarEstabelecimentos();
+			lista = estabelecimento.listarEstabelecimento();
 		}
 		session.setAttribute("lista", lista);
 
