@@ -1,7 +1,7 @@
 package command;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Avaliacao;
+import model.Usuario;
 import service.AvaliacaoService;
+import service.EstabelecimentoService;
 
 public class CriarAvaliacao implements Command
 {
@@ -18,6 +20,9 @@ public class CriarAvaliacao implements Command
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		
+		// service estabelecimento
+		EstabelecimentoService es = new EstabelecimentoService();
 		request.setCharacterEncoding("UTF-8");
 		// dados da avaliacÃ£o
 		String aId = request.getParameter("aId");
@@ -35,16 +40,20 @@ public class CriarAvaliacao implements Command
 		{
 
 		}
+		//abre a session
+		HttpSession session = request.getSession();
+		
 
 		
 		//dados extras ESTABELECIMENTO
-		int eId=1;
+		int eId= Integer.parseInt(request.getParameter("eId"));
 		
 		//dados extras USUARIO
-		int uId=1;
+		Usuario usuario =(Usuario) session.getAttribute("usuario");
+		int uId= usuario.getId() ;
 		
 		//dados extras USUARIO
-		int cId=1;
+		int cId=es.retornaIdCategoria(eId);
 		
 		
 				
@@ -65,14 +74,14 @@ public class CriarAvaliacao implements Command
 		// Instanciando o service
 		AvaliacaoService as = new AvaliacaoService();
 		RequestDispatcher view = null;
-		HttpSession session = request.getSession();
 		
-		//Gerando média
+		
 		double media = avaliacao.getNotaAcessoCadeirante()+avaliacao.getNotaInstrucaoBraile()+avaliacao.getNotaSanitarioCadeirante()+avaliacao.getNotaSinalizacaoPiso();
 		media = media/4;
 		avaliacao.setNotaGeral(media);
 		as.criar(avaliacao);
-			
+		ArrayList<Avaliacao> lista = new ArrayList<>();
+		lista.add(avaliacao);
 	
 		session.setAttribute("avaliacao", avaliacao);
 		view = request.getRequestDispatcher("AlterarAvaliacao.jsp");

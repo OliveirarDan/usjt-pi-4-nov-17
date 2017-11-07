@@ -7,13 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import model.Avaliacao;
 import model.Estabelecimento;
 
 public class EstabelecimentoDAO
 {
 
-	public int criar(Estabelecimento estabelecimento)
+	public void criar(Estabelecimento estabelecimento)
 	{
 		String sqlInsert = "INSERT INTO tbl_estabelecimento(nome, endereco, lat, lng, horario_funcionamento, telefone, email, site,tbl_categoria_id_categoria ) "
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,7 +46,6 @@ public class EstabelecimentoDAO
 		{
 			e.printStackTrace();
 		}
-		return estabelecimento.getId();
 	}
 
 	public void atualizar(Estabelecimento estabelecimento)
@@ -133,28 +132,29 @@ public class EstabelecimentoDAO
 		return estabelecimento;
 	}
 	
-
-	public ArrayList<Estabelecimento> listarEstabelecimentos() {
+	public ArrayList<Estabelecimento> listarEstabelecimento() {
 		Estabelecimento estabelecimento;
+
 		ArrayList<Estabelecimento> lista = new ArrayList<>();
-		String sqlSelect = "SELECT nome, endereco, lat, lng, horario_funcionamento, telefone, email, site, tbl_categoria_id_categoria FROM tbl_estabelecimento";
+		String sqlSelect = "SELECT id_estabelecimento, nome, endereco, horario_funcionamento, telefone, email, site from tbl_estabelecimento";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
 			try (ResultSet rs = stm.executeQuery();) {
 				while (rs.next()) {
 					estabelecimento = new Estabelecimento();
+					estabelecimento.setId(rs.getInt("id_estabelecimento"));
 					estabelecimento.setNome(rs.getString("nome"));
 					estabelecimento.setEndereco(rs.getString("endereco"));
 					estabelecimento.setHorario(rs.getString("horario_funcionamento"));
 					estabelecimento.setTelefone(rs.getString("telefone"));
-					estabelecimento.setEmail(rs.getString("email"));
 					estabelecimento.setSite(rs.getString("site"));
-					estabelecimento.setIdCategoria(rs.getInt("tbl_categoria_id_categoria"));
+			//		estabelecimento.setIdCategoria(rs.getInt("categoria"));
+		
 					lista.add(estabelecimento);
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
@@ -162,10 +162,10 @@ public class EstabelecimentoDAO
 		return lista;
 	}
 
-	public ArrayList<Estabelecimento> listarEstabelecimentos(String chave) {
+	public ArrayList<Estabelecimento> listarEstabelecimento(String chave) {
 		Estabelecimento estabelecimento;
 		ArrayList<Estabelecimento> lista = new ArrayList<>();
-		String sqlSelect = "SELECT nome, endereco, lat, lng, horario_funcionamento, telefone, email, site, tbl_categoria_id_categoria FROM tbl_estabelecimento where upper(nome) like ?";
+		String sqlSelect = "SELECT id_estabelecimento, nome, endereco, horario_funcionamento, telefone, email, site from tbl_estabelecimento where upper(nome) like ?";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
@@ -173,13 +173,13 @@ public class EstabelecimentoDAO
 			try (ResultSet rs = stm.executeQuery();) {
 				while (rs.next()) {
 					estabelecimento = new Estabelecimento();
+					estabelecimento.setId(rs.getInt("id_estabelecimento"));
 					estabelecimento.setNome(rs.getString("nome"));
 					estabelecimento.setEndereco(rs.getString("endereco"));
 					estabelecimento.setHorario(rs.getString("horario_funcionamento"));
 					estabelecimento.setTelefone(rs.getString("telefone"));
-					estabelecimento.setEmail(rs.getString("email"));
 					estabelecimento.setSite(rs.getString("site"));
-					estabelecimento.setIdCategoria(rs.getInt("tbl_categoria_id_categoria"));
+				//	estabelecimento.setIdCategoria(rs.getInt("categoria"));
 					lista.add(estabelecimento);
 				}
 			} catch (SQLException e) {
@@ -190,4 +190,38 @@ public class EstabelecimentoDAO
 		}
 		return lista;
 	}
+	
+	
+	public int retornaIdCategoria(int idEstabelecimento) {
+		Estabelecimento estabelecimento = new Estabelecimento();
+		estabelecimento.setId(idEstabelecimento);
+		String sqlSelect = "select tbl_categoria_id_categoria from tbl_estabelecimento where id_estabelecimento = ?";
+		try (Connection conn = ConnectionFactory.obtemConexao();
+				PreparedStatement stm = conn.prepareStatement(sqlSelect);)
+		{
+			stm.setInt(1, estabelecimento.getId());
+			try (ResultSet rs = stm.executeQuery();)
+			{
+				if (rs.next())
+				{
+					estabelecimento.setIdCategoria(rs.getInt("tbl_categoria_id_categoria"));
+
+				} else
+				{
+					estabelecimento.setIdCategoria(-1);
+				}
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		} catch (SQLException e1)
+		{
+			System.out.print(e1.getStackTrace());
+		}
+		return estabelecimento.getIdCategoria();
+		
+		
+	}
+	
+	
 }

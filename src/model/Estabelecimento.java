@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class Estabelecimento extends Categoria
 	{
 		int id;
@@ -14,8 +12,6 @@ public class Estabelecimento extends Categoria
 		String telefone;
 		String email;
 		String site;
-		
-		
 		
 		
 		public Estabelecimento() {
@@ -53,7 +49,8 @@ public class Estabelecimento extends Categoria
 		}
 		public Categoria getCategoria() {
 			return categoria;
-		}		
+		}
+		
 		public void setCategoria(Categoria categoria) {
 			this.categoria = categoria;
 		}
@@ -77,9 +74,7 @@ public class Estabelecimento extends Categoria
 			this.site = site;
 		}
 		
-		
-		
-		
+			
 		
 		public String getEmail() {
 			return email;

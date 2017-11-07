@@ -37,7 +37,7 @@
 
                         <div class="col-md-6">
                             <div class="input-group h2">
-                                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Estabelecimento (deixe vazio para trazer todos)">
+                                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Estabelecimento">
                                 <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit" name="command" value="ListarEstabelecimentoBuscar">
                     <span class="glyphicon glyphicon-search"></span>
@@ -67,6 +67,7 @@
                                     <th>Telefone</th>
                                     <th>Email</th>
                                     <th>Site</th>
+                                    <th>Categoria</th>
                                     <th class="actions">Ações</th>
                                 </tr>
                             </thead>
@@ -94,10 +95,16 @@
 											<td>
                                                 ${estabelecimento.site }
                                             </td>
+                                            <td>
+                                                ${estabelecimento.categoria.nome }
+                                            </td>
 							
-                                            <td class="actions">
-                                                <a class="btn btn-success btn-xs" href="controller.do?command=VisualizarEstabelecimento&id=${estabelecimento.id}&nome=${estabelecimento.nome}&endereco=${estabelecimento.endereco}horario=${estabelecimento.horario}telefone=${estabelecimento.telefone}email=${estabelecimento.email}site=${estabelecimento.site} ">Visualizar</a>
-                                                <a class="btn btn-warning btn-xs" href="controller.do?command=EditarEstabelecimento&id=${estabelecimento.id}&nome=${estabelecimento.nome}&endereco=${estabelecimento.endereco}horario=${estabelecimento.horario}telefone=${estabelecimento.telefone}email=${estabelecimento.email}site=${estabelecimento.site} ">Editar</a>
+                                        <td class="actions">
+                                             <a class="btn btn-primary btn-xs" href="controller.do?command=ListarAvaliacoesPorEstabelecimento&id=${estabelecimento.id}">Listar Avaliações</a>
+                                             <a class="btn btn-danger btn-xs"  href="controller.do?command=CriarAvaliacaoInicio&eId=${estabelecimento.id}">Avaliar</a>                                                                                      
+                                             <a class="btn btn-success btn-xs" href="controller.do?command=VisualizarEstabelecimento&id=${estabelecimento.id }">Visualizar</a>
+                                             <a class="btn btn-warning btn-xs" href="controller.do?command=EditarEstabelecimento&id=${estabelecimento.id }">Editar</a>
+                                            
                                             </td>
                                         </tr>             
                             </c:forEach>

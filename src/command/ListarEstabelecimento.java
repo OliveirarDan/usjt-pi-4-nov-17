@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.ListarEstabelecimentoService;
+import service.EstabelecimentoService;
 import model.Estabelecimento;
 
 public class ListarEstabelecimento implements Command {
@@ -21,7 +21,7 @@ public class ListarEstabelecimento implements Command {
 		//
 		String chave = request.getParameter("data[search]");
 		String acao = request.getParameter("acao");
-		ListarEstabelecimentoService estabelecimento = new ListarEstabelecimentoService();
+		EstabelecimentoService estabelecimento = new EstabelecimentoService();
 		ArrayList<Estabelecimento> lista = null;
 		HttpSession session = request.getSession();
 		if (acao.equals("buscar")) {
